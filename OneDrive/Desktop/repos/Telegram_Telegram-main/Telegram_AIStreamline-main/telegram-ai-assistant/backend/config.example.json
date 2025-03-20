@@ -1,0 +1,131 @@
+{
+    "telegram_bot": {
+        "token": "YOUR_TELEGRAM_BOT_TOKEN",
+        "webhook_url": "YOUR_WEBHOOK_URL"
+    },
+    "ai": {
+        "openai": {
+            "api_key": "YOUR_OPENAI_API_KEY",
+            "model": "gpt-4",
+            "temperature": 0.7,
+            "max_tokens": 1000
+        },
+        "anythingllm": {
+            "api_key": "YOUR_ANYTHINGLLM_API_KEY",
+            "endpoint": "YOUR_ANYTHINGLLM_ENDPOINT"
+        }
+    },
+    "plugins": {
+        "ai_chatbot": {
+            "enabled": true,
+            "default_language": "en"
+        },
+        "voice_command": {
+            "enabled": true,
+            "speech_to_text": {
+                "provider": "google",
+                "api_key": "YOUR_GOOGLE_STT_API_KEY",
+                "project_id": "YOUR_GOOGLE_PROJECT_ID",
+                "private_key_id": "YOUR_PRIVATE_KEY_ID",
+                "private_key": "YOUR_PRIVATE_KEY",
+                "client_email": "YOUR_CLIENT_EMAIL",
+                "client_id": "YOUR_CLIENT_ID",
+                "client_x509_cert_url": "YOUR_CERT_URL"
+            }
+        },
+        "crm": {
+            "hubspot": {
+                "enabled": true,
+                "api_key": "YOUR_HUBSPOT_API_KEY",
+                "sync_interval_minutes": 30
+            },
+            "shopify": {
+                "enabled": true,
+                "shop_url": "YOUR_SHOP_URL",
+                "access_token": "YOUR_SHOPIFY_ACCESS_TOKEN"
+            },
+            "stripe": {
+                "enabled": true,
+                "secret_key": "YOUR_STRIPE_SECRET_KEY",
+                "webhook_secret": "YOUR_STRIPE_WEBHOOK_SECRET"
+            }
+        },
+        "social_media": {
+            "linkedin": {
+                "enabled": true,
+                "access_token": "YOUR_LINKEDIN_ACCESS_TOKEN"
+            },
+            "twitter": {
+                "enabled": true,
+                "api_key": "YOUR_TWITTER_API_KEY",
+                "api_secret": "YOUR_TWITTER_API_SECRET",
+                "access_token": "YOUR_TWITTER_ACCESS_TOKEN",
+                "access_token_secret": "YOUR_TWITTER_ACCESS_TOKEN_SECRET"
+            },
+            "facebook": {
+                "enabled": true,
+                "access_token": "YOUR_FACEBOOK_ACCESS_TOKEN",
+                "page_id": "YOUR_FACEBOOK_PAGE_ID"
+            }
+        },
+        "messaging": {
+            "email": {
+                "enabled": true,
+                "provider": "sendgrid",
+                "api_key": "YOUR_SENDGRID_API_KEY",
+                "from_email": "your@email.com",
+                "from_name": "Your AI Assistant"
+            },
+            "sms": {
+                "enabled": true,
+                "provider": "twilio",
+                "account_sid": "YOUR_TWILIO_ACCOUNT_SID",
+                "auth_token": "YOUR_TWILIO_AUTH_TOKEN",
+                "from_number": "YOUR_TWILIO_PHONE_NUMBER"
+            }
+        },
+        "lead_nurturing": {
+            "enabled": true,
+            "follow_up_delay_days": 3,
+            "max_follow_ups": 5,
+            "templates_dir": "modules/templates",
+            "data_dir": "modules/data"
+        },
+        "analytics": {
+            "enabled": true,
+            "report_schedule": "daily",
+            "report_time": "08:00",
+            "metrics_retention_days": 90,
+            "data_dir": "modules/data"
+        }
+    },
+    "database": {
+        "host": "YOUR_DATABASE_HOST",
+        "port": 5432,
+        "name": "YOUR_DATABASE_NAME",
+        "user": "YOUR_DATABASE_USER",
+        "password": "YOUR_DATABASE_PASSWORD",
+        "ssl_mode": "require"
+    },
+    "logging": {
+        "level": "INFO",
+        "file_path": "logs/app.log",
+        "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        "max_size_mb": 10,
+        "backup_count": 5
+    },
+    "security": {
+        "allowed_origins": ["http://localhost:3000"],
+        "jwt_secret": "YOUR_JWT_SECRET",
+        "jwt_algorithm": "HS256",
+        "jwt_expiration_hours": 24,
+        "api_rate_limit": 100
+    },
+    "webhook": {
+        "enabled": true,
+        "port": 8000,
+        "path": "/telegram/webhook",
+        "ssl_cert": "path/to/cert.pem",
+        "ssl_key": "path/to/key.pem"
+    }
+}

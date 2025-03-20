@@ -1,0 +1,198 @@
+{
+  "client_info": {
+    "client_id": "",
+    "name": "",
+    "domain": "",
+    "contact_email": "",
+    "subscription_tier": "basic",  // basic, professional, enterprise
+    "created_at": "",
+    "updated_at": ""
+  },
+  "branding": {
+    "company_name": "",
+    "logo": {
+      "main_logo_url": "",
+      "favicon_url": "",
+      "mobile_logo_url": "",
+      "email_logo_url": "",
+      "alt_text": "",
+      "max_height": 50,
+      "max_width": 200
+    },
+    "colors": {
+      "primary": "#007bff",
+      "secondary": "#6c757d",
+      "accent": "#28a745",
+      "background": "#ffffff",
+      "text": "#212529",
+      "link": "#007bff",
+      "success": "#28a745",
+      "warning": "#ffc107",
+      "error": "#dc3545"
+    },
+    "typography": {
+      "primary_font": "Arial, sans-serif",
+      "secondary_font": "Georgia, serif",
+      "base_size": "16px",
+      "heading_scale": 1.25
+    },
+    "custom_css": "",
+    "email_template": {
+      "header_color": "#f8f9fa",
+      "footer_color": "#f8f9fa",
+      "button_color": "#007bff",
+      "signature": ""
+    }
+  },
+  "features": {
+    "ai_chatbot": {
+      "enabled": true,
+      "model": "gpt-3.5-turbo",
+      "max_tokens": 2000,
+      "custom_prompts": true,
+      "conversation_history": true
+    },
+    "voice_commands": {
+      "enabled": true,
+      "languages": ["en"],
+      "custom_commands": true
+    },
+    "crm_integration": {
+      "enabled": true,
+      "platforms": {
+        "gohighlevel": true,
+        "salesforce": false,
+        "klaviyo": false
+      },
+      "sync_interval": 30
+    },
+    "social_media": {
+      "enabled": true,
+      "platforms": {
+        "facebook": true,
+        "instagram": true,
+        "twitter": false,
+        "linkedin": false
+      },
+      "auto_posting": true
+    },
+    "email_automation": {
+      "enabled": true,
+      "daily_limit": 1000,
+      "templates_enabled": true,
+      "custom_domains": false
+    },
+    "analytics": {
+      "enabled": true,
+      "custom_reports": false,
+      "export_formats": ["csv", "pdf"],
+      "retention_days": 30
+    },
+    "payment_processing": {
+      "enabled": false,
+      "providers": {
+        "stripe": false,
+        "paypal": false
+      },
+      "test_mode": true
+    }
+  },
+  "integrations": {
+    "boost_space": {
+      "enabled": false,
+      "api_key": "",
+      "workspace_id": "",
+      "features": {
+        "data_sync": true,
+        "automations": false,
+        "analytics": false
+      }
+    },
+    "audience_lab": {
+      "enabled": false,
+      "api_key": "",
+      "superpixel_id": "",
+      "features": {
+        "visitor_tracking": true,
+        "segmentation": false,
+        "enrichment": false
+      }
+    }
+  },
+  "security": {
+    "ip_whitelist": [],
+    "allowed_domains": [],
+    "api_rate_limit": 100,
+    "require_2fa": false,
+    "session_timeout": 3600,
+    "data_retention": {
+      "chat_history_days": 90,
+      "analytics_days": 365,
+      "log_retention_days": 30
+    }
+  },
+  "customization": {
+    "telegram_bot": {
+      "name": "",
+      "welcome_message": "",
+      "help_message": "",
+      "error_message": "",
+      "custom_commands": []
+    },
+    "dashboard": {
+      "default_view": "analytics",
+      "custom_widgets": [],
+      "sidebar_items": [
+        "analytics",
+        "contacts",
+        "automation",
+        "settings"
+      ]
+    },
+    "notifications": {
+      "email": {
+        "enabled": true,
+        "types": ["system_alerts", "reports"]
+      },
+      "telegram": {
+        "enabled": true,
+        "types": ["leads", "errors"]
+      }
+    },
+    "localization": {
+      "timezone": "UTC",
+      "date_format": "YYYY-MM-DD",
+      "time_format": "24h",
+      "language": "en"
+    }
+  },
+  "usage_limits": {
+    "monthly_messages": 10000,
+    "monthly_api_calls": 50000,
+    "storage_gb": 10,
+    "max_contacts": 5000,
+    "concurrent_users": 5
+  },
+  "webhooks": {
+    "endpoints": [],
+    "events": [
+      "contact_created",
+      "message_received",
+      "error_occurred"
+    ],
+    "retry_policy": {
+      "max_attempts": 3,
+      "interval": 300
+    }
+  },
+  "monitoring": {
+    "error_tracking": true,
+    "performance_monitoring": true,
+    "usage_analytics": true,
+    "alert_thresholds": {
+      "error_rate": 0.05,
+      "response_time_ms": 1000,
+      "disk_usage_percent": 90
+    }
+  }
+}

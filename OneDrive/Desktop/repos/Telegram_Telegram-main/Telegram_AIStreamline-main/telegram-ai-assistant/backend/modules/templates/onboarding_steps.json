@@ -1,0 +1,280 @@
+{
+  "steps": [
+    {
+      "id": "basic_info",
+      "name": "Basic Information",
+      "description": "Set up your account details and contact information",
+      "required": true,
+      "order": 1,
+      "fields": [
+        {
+          "id": "company_name",
+          "name": "Company Name",
+          "type": "text",
+          "required": true,
+          "validation": {
+            "min_length": 2,
+            "max_length": 100
+          }
+        },
+        {
+          "id": "contact_name",
+          "name": "Contact Name",
+          "type": "text",
+          "required": true,
+          "validation": {
+            "min_length": 2,
+            "max_length": 100
+          }
+        },
+        {
+          "id": "contact_email",
+          "name": "Contact Email",
+          "type": "email",
+          "required": true,
+          "validation": {
+            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        },
+        {
+          "id": "contact_phone",
+          "name": "Contact Phone",
+          "type": "phone",
+          "required": false,
+          "validation": {
+            "pattern": "^\\+?[1-9]\\d{1,14}$"
+          }
+        },
+        {
+          "id": "timezone",
+          "name": "Timezone",
+          "type": "select",
+          "required": true,
+          "options": "timezones"
+        }
+      ]
+    },
+    {
+      "id": "branding",
+      "name": "Branding Setup",
+      "description": "Customize your brand appearance",
+      "required": true,
+      "order": 2,
+      "fields": [
+        {
+          "id": "logo",
+          "name": "Company Logo",
+          "type": "file",
+          "required": true,
+          "validation": {
+            "max_size": 5242880,
+            "allowed_types": ["image/png", "image/jpeg", "image/svg+xml"]
+          }
+        },
+        {
+          "id": "favicon",
+          "name": "Favicon",
+          "type": "file",
+          "required": false,
+          "validation": {
+            "max_size": 1048576,
+            "allowed_types": ["image/png", "image/x-icon"]
+          }
+        },
+        {
+          "id": "primary_color",
+          "name": "Primary Color",
+          "type": "color",
+          "required": true,
+          "default": "#007bff"
+        },
+        {
+          "id": "secondary_color",
+          "name": "Secondary Color",
+          "type": "color",
+          "required": true,
+          "default": "#6c757d"
+        },
+        {
+          "id": "font_family",
+          "name": "Font Family",
+          "type": "select",
+          "required": true,
+          "options": "fonts",
+          "default": "Arial, sans-serif"
+        }
+      ]
+    },
+    {
+      "id": "features",
+      "name": "Feature Selection",
+      "description": "Choose which features you want to enable",
+      "required": true,
+      "order": 3,
+      "fields": [
+        {
+          "id": "ai_chatbot",
+          "name": "AI Chatbot",
+          "type": "toggle",
+          "required": false,
+          "default": true,
+          "config": {
+            "model": "gpt-3.5-turbo",
+            "max_tokens": 2000
+          }
+        },
+        {
+          "id": "voice_commands",
+          "name": "Voice Commands",
+          "type": "toggle",
+          "required": false,
+          "default": false,
+          "config": {
+            "languages": ["en"]
+          }
+        },
+        {
+          "id": "crm_integration",
+          "name": "CRM Integration",
+          "type": "toggle",
+          "required": false,
+          "default": true,
+          "config": {
+            "sync_interval": 30
+          }
+        },
+        {
+          "id": "social_media",
+          "name": "Social Media Automation",
+          "type": "toggle",
+          "required": false,
+          "default": true,
+          "config": {
+            "platforms": ["facebook", "instagram"]
+          }
+        },
+        {
+          "id": "email_automation",
+          "name": "Email Automation",
+          "type": "toggle",
+          "required": false,
+          "default": true,
+          "config": {
+            "daily_limit": 1000
+          }
+        },
+        {
+          "id": "analytics",
+          "name": "Analytics & Reporting",
+          "type": "toggle",
+          "required": false,
+          "default": true,
+          "config": {
+            "retention_days": 30
+          }
+        }
+      ]
+    },
+    {
+      "id": "integrations",
+      "name": "Integration Setup",
+      "description": "Configure your external integrations",
+      "required": false,
+      "order": 4,
+      "fields": [
+        {
+          "id": "gohighlevel",
+          "name": "GoHighLevel",
+          "type": "integration",
+          "required": false,
+          "fields": [
+            {
+              "id": "api_key",
+              "name": "API Key",
+              "type": "password",
+              "required": true
+            },
+            {
+              "id": "location_id",
+              "name": "Location ID",
+              "type": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "salesforce",
+          "name": "Salesforce",
+          "type": "integration",
+          "required": false,
+          "fields": [
+            {
+              "id": "client_id",
+              "name": "Client ID",
+              "type": "text",
+              "required": true
+            },
+            {
+              "id": "client_secret",
+              "name": "Client Secret",
+              "type": "password",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "klaviyo",
+          "name": "Klaviyo",
+          "type": "integration",
+          "required": false,
+          "fields": [
+            {
+              "id": "api_key",
+              "name": "API Key",
+              "type": "password",
+              "required": true
+            },
+            {
+              "id": "list_id",
+              "name": "List ID",
+              "type": "text",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "completion": {
+    "required_steps": ["basic_info", "branding", "features"],
+    "success_message": "Congratulations! Your account is now set up and ready to use.",
+    "next_steps": [
+      {
+        "title": "Explore Dashboard",
+        "description": "Familiarize yourself with your new dashboard and available features.",
+        "url": "/dashboard"
+      },
+      {
+        "title": "View Documentation",
+        "description": "Learn more about how to use the platform effectively.",
+        "url": "/docs"
+      },
+      {
+        "title": "Schedule Training",
+        "description": "Book a training session with our team.",
+        "url": "/training"
+      }
+    ]
+  },
+  "reminders": {
+    "incomplete_step": {
+      "delay_hours": 24,
+      "max_reminders": 3,
+      "channels": ["email", "sms"]
+    },
+    "abandoned": {
+      "delay_hours": 72,
+      "channels": ["email"]
+    }
+  }
+}

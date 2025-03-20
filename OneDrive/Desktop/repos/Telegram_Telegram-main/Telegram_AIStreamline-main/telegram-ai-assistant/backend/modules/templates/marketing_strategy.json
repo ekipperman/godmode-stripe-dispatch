@@ -1,0 +1,395 @@
+{
+  "target_audiences": {
+    "digital_marketers": {
+      "persona": {
+        "role": "Digital Marketing Manager",
+        "company_size": "10-500 employees",
+        "pain_points": [
+          "Manual campaign management",
+          "Data scattered across tools",
+          "Time-consuming reporting",
+          "Need for personalization at scale"
+        ],
+        "goals": [
+          "Automate repetitive tasks",
+          "Centralize marketing data",
+          "Improve campaign performance",
+          "Scale personalization efforts"
+        ]
+      },
+      "channels": [
+        "LinkedIn",
+        "Facebook Ads",
+        "Google Ads",
+        "Marketing blogs"
+      ],
+      "content_topics": [
+        "Marketing automation",
+        "AI in marketing",
+        "Campaign optimization",
+        "Data-driven marketing"
+      ]
+    },
+    "ecommerce_owners": {
+      "persona": {
+        "role": "E-commerce Business Owner",
+        "company_size": "1-50 employees",
+        "pain_points": [
+          "Customer service automation",
+          "Order management",
+          "Marketing automation",
+          "Inventory synchronization"
+        ],
+        "goals": [
+          "Increase sales",
+          "Improve customer service",
+          "Automate marketing",
+          "Streamline operations"
+        ]
+      },
+      "channels": [
+        "Facebook Ads",
+        "Instagram Ads",
+        "Google Shopping",
+        "E-commerce forums"
+      ],
+      "content_topics": [
+        "E-commerce automation",
+        "Customer service bots",
+        "Inventory management",
+        "Marketing automation"
+      ]
+    },
+    "b2b_sales": {
+      "persona": {
+        "role": "Sales Director",
+        "company_size": "50-1000 employees",
+        "pain_points": [
+          "Lead qualification",
+          "Follow-up automation",
+          "Pipeline management",
+          "Sales reporting"
+        ],
+        "goals": [
+          "Increase conversion rates",
+          "Automate follow-ups",
+          "Improve lead scoring",
+          "Better sales insights"
+        ]
+      },
+      "channels": [
+        "LinkedIn Ads",
+        "Google Ads",
+        "Sales conferences",
+        "Industry webinars"
+      ],
+      "content_topics": [
+        "Sales automation",
+        "Lead scoring",
+        "Pipeline optimization",
+        "AI in sales"
+      ]
+    },
+    "freelancers": {
+      "persona": {
+        "role": "Independent Consultant",
+        "company_size": "1-5 employees",
+        "pain_points": [
+          "Time management",
+          "Client communication",
+          "Project automation",
+          "Administrative tasks"
+        ],
+        "goals": [
+          "Save time",
+          "Scale business",
+          "Improve client service",
+          "Automate admin work"
+        ]
+      },
+      "channels": [
+        "Instagram",
+        "Twitter",
+        "Freelance platforms",
+        "Professional communities"
+      ],
+      "content_topics": [
+        "Freelance automation",
+        "Time management",
+        "Business scaling",
+        "Client management"
+      ]
+    }
+  },
+  "acquisition_channels": {
+    "paid_advertising": {
+      "platforms": {
+        "google_ads": {
+          "campaign_types": [
+            "Search",
+            "Display",
+            "YouTube"
+          ],
+          "target_keywords": [
+            "AI automation tools",
+            "Marketing automation software",
+            "CRM integration",
+            "Business automation platform"
+          ],
+          "budget_allocation": 0.4
+        },
+        "facebook_ads": {
+          "campaign_types": [
+            "Conversion",
+            "Lead generation",
+            "Remarketing"
+          ],
+          "targeting": {
+            "interests": [
+              "Digital marketing",
+              "Business automation",
+              "CRM software",
+              "AI technology"
+            ],
+            "job_titles": [
+              "Marketing Manager",
+              "Business Owner",
+              "Sales Director",
+              "Entrepreneur"
+            ]
+          },
+          "budget_allocation": 0.3
+        },
+        "linkedin_ads": {
+          "campaign_types": [
+            "Sponsored Content",
+            "Message Ads",
+            "Lead Gen Forms"
+          ],
+          "targeting": {
+            "job_functions": [
+              "Marketing",
+              "Sales",
+              "Information Technology",
+              "Business Development"
+            ],
+            "company_size": [
+              "1-10",
+              "11-50",
+              "51-200",
+              "201-1000"
+            ]
+          },
+          "budget_allocation": 0.3
+        }
+      }
+    },
+    "content_marketing": {
+      "blog_content": {
+        "categories": [
+          "AI and Automation",
+          "Marketing Strategy",
+          "Sales Optimization",
+          "Business Growth"
+        ],
+        "frequency": "2 posts per week",
+        "distribution": [
+          "Social media",
+          "Email newsletter",
+          "Content syndication",
+          "Medium publication"
+        ]
+      },
+      "lead_magnets": {
+        "ebooks": [
+          "Ultimate Guide to AI Automation",
+          "Marketing Automation Playbook",
+          "Sales Pipeline Optimization Guide"
+        ],
+        "webinars": [
+          "Getting Started with AI Automation",
+          "Scaling Your Business with Automation",
+          "Advanced Marketing Automation Strategies"
+        ],
+        "templates": [
+          "Marketing Campaign Templates",
+          "Sales Email Templates",
+          "Automation Workflow Templates"
+        ]
+      }
+    },
+    "product_led_growth": {
+      "free_trial": {
+        "duration_days": 14,
+        "features_included": [
+          "Basic AI chatbot",
+          "Limited automation workflows",
+          "Basic CRM features",
+          "Email templates"
+        ],
+        "conversion_tactics": [
+          "Usage-based prompts",
+          "Feature discovery tours",
+          "Success milestone celebrations",
+          "Upgrade incentives"
+        ]
+      },
+      "freemium_tier": {
+        "features": [
+          "Basic chatbot responses",
+          "3 automation workflows",
+          "100 contacts",
+          "Basic analytics"
+        ],
+        "usage_limits": {
+          "monthly_messages": 1000,
+          "ai_tokens": 10000,
+          "api_calls": 1000
+        },
+        "upgrade_triggers": [
+          "80% usage threshold",
+          "Feature access attempts",
+          "Team collaboration needs"
+        ]
+      }
+    },
+    "referral_program": {
+      "user_referrals": {
+        "reward_referrer": {
+          "type": "credit",
+          "amount": 50,
+          "conditions": "Referred user must upgrade to paid plan"
+        },
+        "reward_referred": {
+          "type": "discount",
+          "amount": 25,
+          "duration_months": 3
+        }
+      },
+      "affiliate_program": {
+        "commission_structure": {
+          "basic_plan": {
+            "percentage": 20,
+            "recurring": true,
+            "duration_months": 12
+          },
+          "professional_plan": {
+            "percentage": 25,
+            "recurring": true,
+            "duration_months": 12
+          },
+          "enterprise_plan": {
+            "percentage": 30,
+            "recurring": true,
+            "duration_months": 12
+          }
+        },
+        "requirements": {
+          "minimum_traffic": 1000,
+          "relevant_audience": true,
+          "content_quality": "high"
+        }
+      }
+    }
+  },
+  "retention_strategy": {
+    "onboarding": {
+      "welcome_sequence": [
+        {
+          "day": 0,
+          "channel": "email",
+          "content": "Welcome & Quick Start Guide"
+        },
+        {
+          "day": 1,
+          "channel": "in_app",
+          "content": "Feature Tour"
+        },
+        {
+          "day": 3,
+          "channel": "email",
+          "content": "Success Stories & Use Cases"
+        },
+        {
+          "day": 7,
+          "channel": "email",
+          "content": "Advanced Features & Tips"
+        }
+      ],
+      "success_metrics": [
+        "Feature activation rate",
+        "Time to first value",
+        "Onboarding completion rate"
+      ]
+    },
+    "engagement": {
+      "email_campaigns": {
+        "educational": {
+          "frequency": "weekly",
+          "content_types": [
+            "Tips & tricks",
+            "Best practices",
+            "Case studies",
+            "Industry insights"
+          ]
+        },
+        "product_updates": {
+          "frequency": "monthly",
+          "content_types": [
+            "New features",
+            "Improvements",
+            "Integration updates",
+            "Success stories"
+          ]
+        }
+      },
+      "in_app_messaging": {
+        "feature_announcements": {
+          "trigger": "new_feature_release",
+          "placement": "dashboard"
+        },
+        "usage_tips": {
+          "trigger": "feature_interaction",
+          "placement": "contextual"
+        }
+      }
+    }
+  },
+  "analytics_tracking": {
+    "acquisition_metrics": [
+      "Customer acquisition cost (CAC)",
+      "Conversion rate by channel",
+      "Lead quality score",
+      "Time to conversion"
+    ],
+    "engagement_metrics": [
+      "Feature adoption rate",
+      "Active users (DAU/MAU)",
+      "Session duration",
+      "Feature usage frequency"
+    ],
+    "retention_metrics": [
+      "Customer lifetime value (CLV)",
+      "Churn rate",
+      "Net revenue retention",
+      "Expansion revenue"
+    ],
+    "tools": {
+      "analytics": [
+        "Google Analytics",
+        "Mixpanel",
+        "Amplitude"
+      ],
+      "attribution": [
+        "Attribution App",
+        "Segment",
+        "Branch"
+      ],
+      "engagement": [
+        "Intercom",
+        "Customer.io",
+        "Heap"
+      ]
+    }
+  }
+}

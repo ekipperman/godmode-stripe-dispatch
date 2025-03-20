@@ -1,0 +1,426 @@
+{
+  "ai_models": {
+    "claude": {
+      "enabled": true,
+      "api_version": "v1",
+      "max_tokens": 8000,
+      "temperature": 0.7,
+      "use_cases": [
+        "website_copy",
+        "blog_posts",
+        "social_media",
+        "email_campaigns",
+        "video_scripts",
+        "podcast_scripts"
+      ]
+    },
+    "gpt4": {
+      "enabled": true,
+      "api_version": "v1",
+      "max_tokens": 4000,
+      "temperature": 0.7,
+      "use_cases": [
+        "website_copy",
+        "blog_posts",
+        "social_media",
+        "email_campaigns",
+        "video_scripts",
+        "podcast_scripts"
+      ]
+    }
+  },
+  "website_creation": {
+    "platforms": {
+      "webflow": {
+        "enabled": true,
+        "api_version": "v2",
+        "templates": {
+          "business": {
+            "name": "Business Template",
+            "sections": [
+              "hero",
+              "features",
+              "about",
+              "testimonials",
+              "pricing",
+              "contact"
+            ]
+          },
+          "ecommerce": {
+            "name": "E-commerce Template",
+            "sections": [
+              "hero",
+              "products",
+              "categories",
+              "featured",
+              "reviews",
+              "contact"
+            ]
+          }
+        }
+      },
+      "wordpress": {
+        "enabled": true,
+        "plugins": [
+          "elementor-pro",
+          "yoast-seo",
+          "wp-rocket"
+        ],
+        "templates": {
+          "business": {
+            "name": "Business Template",
+            "sections": [
+              "hero",
+              "services",
+              "portfolio",
+              "team",
+              "contact"
+            ]
+          },
+          "blog": {
+            "name": "Blog Template",
+            "sections": [
+              "header",
+              "featured_posts",
+              "categories",
+              "newsletter",
+              "about"
+            ]
+          }
+        }
+      }
+    },
+    "content_generation": {
+      "sections": {
+        "hero": {
+          "elements": [
+            "headline",
+            "subheadline",
+            "cta_button"
+          ],
+          "prompt_template": "Create a compelling hero section for {business_type} that highlights {value_proposition}"
+        },
+        "features": {
+          "elements": [
+            "feature_cards",
+            "descriptions",
+            "icons"
+          ],
+          "prompt_template": "Generate feature descriptions for {product_type} focusing on {benefits}"
+        }
+      },
+      "seo": {
+        "meta_tags": true,
+        "schema_markup": true,
+        "keyword_optimization": true
+      }
+    }
+  },
+  "video_creation": {
+    "platforms": {
+      "synthesia": {
+        "enabled": true,
+        "video_types": [
+          "explainer",
+          "product_demo",
+          "testimonial"
+        ],
+        "avatars": [
+          "professional",
+          "casual",
+          "executive"
+        ]
+      },
+      "descript": {
+        "enabled": true,
+        "features": [
+          "transcription",
+          "editing",
+          "overdub"
+        ]
+      }
+    },
+    "automation": {
+      "script_generation": {
+        "templates": {
+          "explainer": {
+            "sections": [
+              "hook",
+              "problem",
+              "solution",
+              "features",
+              "call_to_action"
+            ],
+            "duration": "2-3 minutes"
+          },
+          "product_demo": {
+            "sections": [
+              "introduction",
+              "features_overview",
+              "use_cases",
+              "benefits",
+              "next_steps"
+            ],
+            "duration": "3-5 minutes"
+          }
+        }
+      },
+      "editing": {
+        "auto_cut": true,
+        "background_music": true,
+        "captions": true,
+        "transitions": true
+      }
+    }
+  },
+  "podcast_creation": {
+    "platforms": {
+      "descript": {
+        "enabled": true,
+        "features": [
+          "recording",
+          "editing",
+          "transcription"
+        ]
+      },
+      "amazon_polly": {
+        "enabled": true,
+        "voices": [
+          "Matthew",
+          "Joanna",
+          "Stephen"
+        ]
+      }
+    },
+    "automation": {
+      "script_generation": {
+        "templates": {
+          "interview": {
+            "sections": [
+              "intro",
+              "guest_background",
+              "main_topics",
+              "q_and_a",
+              "conclusion"
+            ],
+            "duration": "30-45 minutes"
+          },
+          "solo": {
+            "sections": [
+              "intro",
+              "topic_overview",
+              "main_points",
+              "takeaways",
+              "call_to_action"
+            ],
+            "duration": "15-20 minutes"
+          }
+        }
+      },
+      "distribution": {
+        "platforms": [
+          "spotify",
+          "apple_podcasts",
+          "google_podcasts"
+        ],
+        "auto_publish": true
+      }
+    }
+  },
+  "blog_creation": {
+    "seo_tools": {
+      "surfer_seo": {
+        "enabled": true,
+        "features": [
+          "keyword_research",
+          "content_optimization",
+          "competitor_analysis"
+        ]
+      },
+      "clearscope": {
+        "enabled": true,
+        "features": [
+          "content_briefs",
+          "keyword_targeting",
+          "content_grading"
+        ]
+      }
+    },
+    "content_generation": {
+      "templates": {
+        "how_to": {
+          "sections": [
+            "introduction",
+            "problem_statement",
+            "solution_steps",
+            "tips",
+            "conclusion"
+          ],
+          "word_count": "1500-2000"
+        },
+        "listicle": {
+          "sections": [
+            "introduction",
+            "list_items",
+            "detailed_explanations",
+            "conclusion"
+          ],
+          "word_count": "2000-2500"
+        }
+      },
+      "optimization": {
+        "keyword_density": true,
+        "readability_check": true,
+        "internal_linking": true
+      }
+    }
+  },
+  "social_media": {
+    "platforms": {
+      "buffer": {
+        "enabled": true,
+        "features": [
+          "scheduling",
+          "analytics",
+          "hashtag_suggestions"
+        ]
+      },
+      "hootsuite": {
+        "enabled": true,
+        "features": [
+          "content_curation",
+          "team_collaboration",
+          "campaign_tracking"
+        ]
+      }
+    },
+    "content_generation": {
+      "post_types": {
+        "promotional": {
+          "elements": [
+            "headline",
+            "body",
+            "call_to_action",
+            "hashtags"
+          ],
+          "platforms": [
+            "instagram",
+            "facebook",
+            "linkedin"
+          ]
+        },
+        "educational": {
+          "elements": [
+            "tip_title",
+            "explanation",
+            "key_points",
+            "hashtags"
+          ],
+          "platforms": [
+            "twitter",
+            "linkedin"
+          ]
+        }
+      },
+      "scheduling": {
+        "optimal_times": true,
+        "frequency_limits": true,
+        "platform_specific": true
+      }
+    }
+  },
+  "email_campaigns": {
+    "platforms": {
+      "mailchimp": {
+        "enabled": true,
+        "features": [
+          "automation",
+          "segmentation",
+          "a_b_testing"
+        ]
+      },
+      "klaviyo": {
+        "enabled": true,
+        "features": [
+          "personalization",
+          "flow_builder",
+          "analytics"
+        ]
+      }
+    },
+    "content_generation": {
+      "templates": {
+        "welcome_series": {
+          "emails": [
+            {
+              "subject": "Welcome to {brand_name}!",
+              "content_type": "introduction",
+              "delay_days": 0
+            },
+            {
+              "subject": "Getting Started with {product_name}",
+              "content_type": "tutorial",
+              "delay_days": 2
+            }
+          ]
+        },
+        "promotional": {
+          "emails": [
+            {
+              "subject": "Special Offer Inside 🎉",
+              "content_type": "promotion",
+              "elements": [
+                "offer_headline",
+                "benefits",
+                "call_to_action"
+              ]
+            }
+          ]
+        }
+      },
+      "personalization": {
+        "merge_tags": true,
+        "dynamic_content": true,
+        "behavioral_targeting": true
+      }
+    }
+  },
+  "analytics": {
+    "tracking": {
+      "content_performance": [
+        "views",
+        "engagement",
+        "conversions",
+        "shares"
+      ],
+      "seo_metrics": [
+        "rankings",
+        "organic_traffic",
+        "backlinks"
+      ],
+      "social_metrics": [
+        "reach",
+        "engagement",
+        "clicks"
+      ]
+    },
+    "optimization": {
+      "a_b_testing": {
+        "enabled": true,
+        "elements": [
+          "headlines",
+          "cta_buttons",
+          "images"
+        ]
+      },
+      "auto_optimization": {
+        "enabled": true,
+        "metrics": [
+          "conversion_rate",
+          "engagement_rate",
+          "bounce_rate"
+        ]
+      }
+    }
+  }
+}

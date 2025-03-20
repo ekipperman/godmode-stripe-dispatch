@@ -1,0 +1,70 @@
+# Core dependencies
+fastapi==0.95.0
+uvicorn[standard]==0.22.0
+python-telegram-bot==20.3
+python-dotenv==1.0.0
+pydantic==1.10.7
+python-multipart==0.0.6
+
+# Redis (Important for async bot + caching)
+redis==4.5.5
+
+# Database
+sqlalchemy==1.4.46
+psycopg2-binary==2.9.6
+
+# Auth & Security
+python-jose==3.3.0
+passlib[bcrypt]==1.7.4
+cryptography==41.0.1
+
+# Async Networking
+aiohttp==3.8.4
+httpx==0.24.1
+
+# AI & NLP
+openai==0.27.8
+google-cloud-speech==2.20.0
+google-cloud-texttospeech==2.14.1
+nltk==3.8.1
+spacy==3.5.0
+
+# Social Media APIs
+tweepy==4.14.0
+linkedin-api==2.0.0a3
+facebook-sdk==3.1.0
+
+# Email & SMS
+sendgrid==6.10.0
+twilio==8.3.0
+
+# CRM / eCommerce APIs
+hubspot-api-client==8.0.0
+shopify==12.1.0
+stripe==8.8.0
+
+# Analytics & Reporting
+pandas==1.5.3
+numpy==1.24.3
+matplotlib==3.7.1
+seaborn==0.12.2
+
+# Testing
+pytest==7.3.1
+pytest-asyncio==0.20.3
+pytest-cov==4.0.0
+requests-mock==1.11.0
+responses==0.22.0
+
+# Dev Tools
+black==23.3.0
+flake8==6.0.0
+mypy==1.2.0
+isort==5.12.0
+
+# Utilities
+PyYAML==6.0
+python-slugify==8.0.1
+validators==0.20.0
+psutil==5.9.5
+humanize==4.6.0

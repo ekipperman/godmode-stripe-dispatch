@@ -1,0 +1,217 @@
+{
+  "subscription_plans": {
+    "basic": {
+      "name": "Basic Plan",
+      "price": {
+        "monthly": 29.99,
+        "yearly": 299.99
+      },
+      "features": {
+        "ai_chatbot": {
+          "enabled": true,
+          "monthly_tokens": 100000,
+          "model": "gpt-3.5-turbo"
+        },
+        "crm_integration": {
+          "enabled": true,
+          "platforms": ["gohighlevel"],
+          "monthly_syncs": 1000
+        },
+        "social_media": {
+          "enabled": true,
+          "platforms": ["facebook", "instagram"],
+          "monthly_posts": 100
+        },
+        "analytics": {
+          "enabled": true,
+          "retention_days": 30,
+          "export_formats": ["csv"]
+        }
+      },
+      "limits": {
+        "contacts": 1000,
+        "monthly_messages": 5000,
+        "storage_gb": 5,
+        "concurrent_users": 2
+      }
+    },
+    "professional": {
+      "name": "Professional Plan",
+      "price": {
+        "monthly": 99.99,
+        "yearly": 999.99
+      },
+      "features": {
+        "ai_chatbot": {
+          "enabled": true,
+          "monthly_tokens": 500000,
+          "model": "gpt-4"
+        },
+        "crm_integration": {
+          "enabled": true,
+          "platforms": ["gohighlevel", "salesforce", "klaviyo"],
+          "monthly_syncs": 10000
+        },
+        "social_media": {
+          "enabled": true,
+          "platforms": ["facebook", "instagram", "twitter", "linkedin"],
+          "monthly_posts": 500
+        },
+        "analytics": {
+          "enabled": true,
+          "retention_days": 90,
+          "export_formats": ["csv", "pdf", "json"]
+        },
+        "voice_commands": {
+          "enabled": true,
+          "languages": ["en"]
+        }
+      },
+      "limits": {
+        "contacts": 10000,
+        "monthly_messages": 50000,
+        "storage_gb": 20,
+        "concurrent_users": 5
+      }
+    },
+    "enterprise": {
+      "name": "Enterprise Plan",
+      "price": "custom",
+      "features": {
+        "ai_chatbot": {
+          "enabled": true,
+          "monthly_tokens": "unlimited",
+          "model": "gpt-4",
+          "custom_training": true
+        },
+        "crm_integration": {
+          "enabled": true,
+          "platforms": "all",
+          "monthly_syncs": "unlimited",
+          "custom_integrations": true
+        },
+        "social_media": {
+          "enabled": true,
+          "platforms": "all",
+          "monthly_posts": "unlimited",
+          "custom_automation": true
+        },
+        "analytics": {
+          "enabled": true,
+          "retention_days": 365,
+          "export_formats": "all",
+          "custom_reports": true
+        },
+        "voice_commands": {
+          "enabled": true,
+          "languages": "all"
+        }
+      },
+      "limits": {
+        "contacts": "unlimited",
+        "monthly_messages": "unlimited",
+        "storage_gb": "custom",
+        "concurrent_users": "unlimited"
+      }
+    }
+  },
+  "usage_based_pricing": {
+    "ai_tokens": {
+      "gpt-3.5-turbo": {
+        "price_per_1k": 0.06,
+        "bulk_discounts": {
+          "1M+": 0.05,
+          "10M+": 0.04,
+          "100M+": 0.03
+        }
+      },
+      "gpt-4": {
+        "price_per_1k": 0.12,
+        "bulk_discounts": {
+          "1M+": 0.10,
+          "10M+": 0.08,
+          "100M+": 0.06
+        }
+      }
+    },
+    "storage": {
+      "price_per_gb": 0.50,
+      "bulk_discounts": {
+        "100GB+": 0.40,
+        "1TB+": 0.30,
+        "10TB+": 0.20
+      }
+    },
+    "api_calls": {
+      "price_per_1k": 0.10,
+      "bulk_discounts": {
+        "100k+": 0.08,
+        "1M+": 0.06,
+        "10M+": 0.04
+      }
+    }
+  },
+  "payment_processing_fees": {
+    "credit_card": {
+      "stripe": {
+        "percentage": 2.9,
+        "fixed": 0.30,
+        "currency": "USD"
+      }
+    },
+    "crypto": {
+      "coinbase": {
+        "percentage": 1.0,
+        "fixed": 0,
+        "supported_currencies": ["BTC", "ETH", "USDC"]
+      },
+      "bitpay": {
+        "percentage": 1.0,
+        "fixed": 0,
+        "supported_currencies": ["BTC", "BCH"]
+      }
+    }
+  },
+  "promotional_offers": {
+    "new_user_discount": {
+      "percentage": 20,
+      "duration_months": 3,
+      "applicable_plans": ["basic", "professional"]
+    },
+    "annual_discount": {
+      "percentage": 16.67,
+      "description": "Get 2 months free with annual billing"
+    },
+    "referral_program": {
+      "referrer_reward": {
+        "amount": 50,
+        "type": "credit"
+      },
+      "referee_discount": {
+        "percentage": 25,
+        "duration_months": 1
+      }
+    }
+  },
+  "enterprise_features": {
+    "custom_development": {
+      "hourly_rate": 150,
+      "minimum_hours": 10
+    },
+    "dedicated_support": {
+      "response_time": "1 hour",
+      "support_channels": ["email", "phone", "slack"],
+      "included": true
+    },
+    "training": {
+      "onboarding_sessions": 5,
+      "monthly_training": true,
+      "custom_documentation": true
+    },
+    "sla": {
+      "uptime": 99.99,
+      "response_time": "5 minutes",
+      "resolution_time": "1 hour"
+    }
+  }
+}

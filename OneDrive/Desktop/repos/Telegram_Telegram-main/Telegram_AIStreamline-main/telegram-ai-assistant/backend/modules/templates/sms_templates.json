@@ -1,0 +1,23 @@
+{
+  "welcome_sms": {
+    "content": "Welcome {name}! Your AI Assistant is ready. Use voice commands or text to get started. Need help? Just ask!"
+  },
+  "reminder": {
+    "content": "Hi {name}, don't forget to check your latest analytics report. Your AI Assistant can show you the insights."
+  },
+  "follow_up": {
+    "content": "Hi {name}, just checking in! How are you finding our service? Reply with your feedback or questions."
+  },
+  "campaign_update": {
+    "content": "Hi {name}, your campaign '{campaign_name}' is performing well! {metric_highlight}"
+  },
+  "lead_nurture": {
+    "content": "Hi {name}, thanks for your interest! Would you like to schedule a demo of our AI assistant?"
+  },
+  "social_post_success": {
+    "content": "Hi {name}, your post has been published successfully across {platforms}. Check engagement stats in your dashboard."
+  },
+  "crm_sync": {
+    "content": "Hi {name}, CRM sync complete. {total_contacts} contacts updated. View details in your dashboard."
+  }
+}

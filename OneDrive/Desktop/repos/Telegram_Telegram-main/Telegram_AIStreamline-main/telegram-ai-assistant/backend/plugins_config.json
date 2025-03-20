@@ -1,0 +1,155 @@
+{
+  "enabled_plugins": {
+    "ai_chatbot": true,
+    "voice_command": true,
+    "crm_integration": true,
+    "social_media_posting": true,
+    "email_sms_automation": true,
+    "lead_nurturing": true,
+    "analytics_reporting": true,
+    "payment_gateway": true,
+    "whitelabel": true,
+    "boost_integration": true,
+    "audiencelab_integration": true
+  },
+  "plugin_settings": {
+    "payment_gateway": {
+      "enabled": true,
+      "stripe": {
+        "enabled": true,
+        "mode": "test",
+        "publishable_key": "YOUR_STRIPE_PUBLISHABLE_KEY",
+        "secret_key": "YOUR_STRIPE_SECRET_KEY",
+        "webhook_secret": "YOUR_STRIPE_WEBHOOK_SECRET",
+        "supported_currencies": ["USD", "EUR", "GBP"],
+        "payment_methods": ["card"],
+        "auto_capture": true,
+        "statement_descriptor": "Your Business Name",
+        "statement_descriptor_suffix": "Payment"
+      },
+      "coinbase": {
+        "enabled": true,
+        "mode": "test",
+        "api_key": "YOUR_COINBASE_API_KEY",
+        "webhook_secret": "YOUR_COINBASE_WEBHOOK_SECRET",
+        "supported_currencies": {
+          "crypto": ["BTC", "ETH", "USDC"],
+          "fiat": ["USD", "EUR", "GBP"]
+        },
+        "auto_convert": true,
+        "confirmation_threshold": 2
+      },
+      "bitpay": {
+        "enabled": true,
+        "mode": "test",
+        "api_key": "YOUR_BITPAY_API_KEY",
+        "merchant_token": "YOUR_BITPAY_MERCHANT_TOKEN",
+        "webhook_url": "https://your-domain.com/api/webhooks/bitpay",
+        "supported_currencies": {
+          "crypto": ["BTC", "BCH"],
+          "fiat": ["USD", "EUR"]
+        },
+        "transaction_speed": "medium"
+      },
+      "security": {
+        "require_3ds": true,
+        "max_attempts": 3,
+        "fraud_detection": {
+          "enabled": true,
+          "rules": {
+            "amount_threshold": 1000,
+            "country_blacklist": [],
+            "ip_velocity": 10
+          }
+        },
+        "refund_policy": {
+          "allowed": true,
+          "window_days": 30,
+          "require_reason": true
+        }
+      },
+      "notifications": {
+        "payment_success": {
+          "email": true,
+          "sms": false,
+          "webhook": true
+        },
+        "payment_failed": {
+          "email": true,
+          "sms": true,
+          "webhook": true
+        },
+        "refund_processed": {
+          "email": true,
+          "sms": false,
+          "webhook": true
+        }
+      },
+      "webhooks": {
+        "retry_attempts": 3,
+        "retry_delay": 300,
+        "endpoints": []
+      },
+      "reporting": {
+        "enabled": true,
+        "daily_summary": true,
+        "monthly_summary": true,
+        "export_formats": ["csv", "json"],
+        "retention_days": 365
+      }
+    },
+    "whitelabel": {
+      "enabled": true,
+      "clients_dir": "data/clients",
+      "assets_dir": "data/assets",
+      "webhook_timeout": 5000,
+      "cache_ttl": 3600
+    },
+    "boost_integration": {
+      "enabled": true,
+      "api_version": "v1",
+      "base_url": "https://api.boost.space",
+      "sync_interval": 15,
+      "retry_attempts": 3
+    },
+    "audiencelab_integration": {
+      "enabled": true,
+      "api_version": "v1",
+      "base_url": "https://api.audiencelab.io",
+      "superpixel": {
+        "enabled": true,
+        "auto_track": true
+      }
+    }
+  },
+  "global_settings": {
+    "environment": "production",
+    "debug_mode": false,
+    "log_level": "info",
+    "cache_enabled": true,
+    "cache_ttl": 3600,
+    "rate_limiting": {
+      "enabled": true,
+      "max_requests": 100,
+      "window_seconds": 60
+    },
+    "security": {
+      "require_authentication": true,
+      "jwt_expiration_hours": 24,
+      "allowed_origins": ["*"],
+      "ssl_verify": true
+    },
+    "monitoring": {
+      "sentry_enabled": true,
+      "performance_monitoring": true,
+      "error_tracking": true,
+      "user_monitoring": true
+    },
+    "scaling": {
+      "auto_scaling": true,
+      "min_instances": 1,
+      "max_instances": 10,
+      "target_cpu_utilization": 70
+    }
+  }
+}

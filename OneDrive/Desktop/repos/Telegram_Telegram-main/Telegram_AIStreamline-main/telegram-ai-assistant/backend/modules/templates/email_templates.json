@@ -1,0 +1,14 @@
+{
+  "welcome_email": {
+    "subject": "Welcome to Our Service!",
+    "content": "Hi {name},\n\nWelcome aboard! We're excited to have you join us. Here's what you can expect from our service:\n\n- AI-powered assistance\n- Voice command automation\n- CRM integration\n- Social media management\n- Email & SMS automation\n\nIf you have any questions, just reply to this email or use our Telegram bot.\n\nBest regards,\nYour AI Assistant"
+  },
+  "getting_started": {
+    "subject": "Getting Started Guide",
+    "content": "Hi {name},\n\nHere are some tips to help you get started with our service:\n\n1. Use voice commands for quick actions\n2. Connect your CRM accounts\n3. Set up social media automation\n4. Configure email campaigns\n\nNeed help? Just ask our AI assistant!\n\nBest regards,\nYour AI Assistant"
+  },
+  "follow_up": {
+    "subject": "How are you finding our service?",
+    "content": "Hi {name},\n\nWe hope you're enjoying our AI assistant. We'd love to hear your feedback on:\n\n- Ease of use\n- Feature functionality\n- Areas for improvement\n\nSimply reply to this email or use our Telegram bot to share your thoughts.\n\nBest regards,\nYour AI Assistant"
+  }
+}

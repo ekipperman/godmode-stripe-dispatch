@@ -1,0 +1,146 @@
+{
+  "welcome_series": {
+    "name": "Welcome Series",
+    "description": "Onboarding sequence for new users",
+    "steps": [
+      {
+        "delay_days": 0,
+        "type": "email",
+        "template": "welcome_email",
+        "subject": "Welcome to Our Service!",
+        "content": "Hi {name},\n\nWelcome aboard! We're excited to have you join us..."
+      },
+      {
+        "delay_days": 1,
+        "type": "sms",
+        "template": "welcome_sms",
+        "content": "Welcome {name}! Your AI Assistant is ready. Use voice commands or text to get started."
+      },
+      {
+        "delay_days": 3,
+        "type": "email",
+        "template": "getting_started",
+        "subject": "Getting Started Guide",
+        "content": "Hi {name},\n\nHere are some tips to help you get started..."
+      },
+      {
+        "delay_days": 7,
+        "type": "email",
+        "template": "follow_up",
+        "subject": "How are you finding our service?",
+        "content": "Hi {name},\n\nWe'd love to hear your feedback..."
+      }
+    ]
+  },
+  "re_engagement": {
+    "name": "Re-engagement Campaign",
+    "description": "Campaign to re-engage inactive users",
+    "steps": [
+      {
+        "delay_days": 0,
+        "type": "email",
+        "template": "miss_you",
+        "subject": "We miss you!",
+        "content": "Hi {name},\n\nWe noticed you haven't been around lately..."
+      },
+      {
+        "delay_days": 3,
+        "type": "sms",
+        "template": "reminder",
+        "content": "Hi {name}, check out the new features we've added to your AI Assistant!"
+      },
+      {
+        "delay_days": 5,
+        "type": "email",
+        "template": "special_offer",
+        "subject": "Special Offer Just for You",
+        "content": "Hi {name},\n\nHere's a special offer to welcome you back..."
+      }
+    ]
+  },
+  "lead_conversion": {
+    "name": "Lead Conversion",
+    "description": "Convert trial users to paid subscribers",
+    "steps": [
+      {
+        "delay_days": 0,
+        "type": "email",
+        "template": "trial_welcome",
+        "subject": "Welcome to Your Trial",
+        "content": "Hi {name},\n\nThanks for starting your trial..."
+      },
+      {
+        "delay_days": 5,
+        "type": "email",
+        "template": "trial_features",
+        "subject": "Discover Premium Features",
+        "content": "Hi {name},\n\nHave you tried these premium features yet?"
+      },
+      {
+        "delay_days": 10,
+        "type": "sms",
+        "template": "trial_reminder",
+        "content": "Hi {name}, your trial ends in 5 days. Upgrade now to keep your AI assistant!"
+      },
+      {
+        "delay_days": 14,
+        "type": "email",
+        "template": "trial_ending",
+        "subject": "Don't Miss Out - Trial Ending Soon",
+        "content": "Hi {name},\n\nYour trial is ending tomorrow..."
+      }
+    ]
+  },
+  "customer_feedback": {
+    "name": "Customer Feedback",
+    "description": "Gather feedback from active users",
+    "steps": [
+      {
+        "delay_days": 0,
+        "type": "email",
+        "template": "feedback_request",
+        "subject": "Your Opinion Matters",
+        "content": "Hi {name},\n\nWe'd love to hear your thoughts..."
+      },
+      {
+        "delay_days": 3,
+        "type": "sms",
+        "template": "feedback_reminder",
+        "content": "Hi {name}, we'd love your feedback! Take our 2-min survey: {survey_link}"
+      },
+      {
+        "delay_days": 7,
+        "type": "email",
+        "template": "feedback_followup",
+        "subject": "Thank You for Your Feedback",
+        "content": "Hi {name},\n\nThank you for sharing your feedback..."
+      }
+    ]
+  },
+  "feature_announcement": {
+    "name": "Feature Announcement",
+    "description": "Announce and promote new features",
+    "steps": [
+      {
+        "delay_days": 0,
+        "type": "email",
+        "template": "new_feature",
+        "subject": "New Feature Alert!",
+        "content": "Hi {name},\n\nWe're excited to announce..."
+      },
+      {
+        "delay_days": 2,
+        "type": "sms",
+        "template": "feature_highlight",
+        "content": "Hi {name}, have you tried our new {feature_name} yet? Try it now!"
+      },
+      {
+        "delay_days": 5,
+        "type": "email",
+        "template": "feature_tips",
+        "subject": "Get the Most Out of {feature_name}",
+        "content": "Hi {name},\n\nHere are some pro tips..."
+      }
+    ]
+  }
+}

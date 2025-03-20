@@ -1,0 +1,299 @@
+{
+  "bot_settings": {
+    "name": "AI Marketing Assistant",
+    "description": "AI-powered marketing and support assistant",
+    "commands": [
+      {
+        "command": "start",
+        "description": "Start using the bot"
+      },
+      {
+        "command": "help",
+        "description": "Get help with commands"
+      },
+      {
+        "command": "onboard",
+        "description": "Start onboarding process"
+      },
+      {
+        "command": "support",
+        "description": "Get customer support"
+      }
+    ],
+    "languages": ["en"],
+    "timezone": "UTC"
+  },
+  "community": {
+    "group": {
+      "welcome_message": "Welcome to our community! 👋\n\nI'm your AI assistant, here to help you with:\n✓ Product information\n✓ Technical support\n✓ Account setup\n✓ Feature requests",
+      "rules": [
+        "Be respectful to others",
+        "No spam or self-promotion",
+        "Keep discussions relevant"
+      ],
+      "auto_responses": {
+        "enabled": true,
+        "triggers": {
+          "pricing": "Here's our pricing information: {pricing_link}",
+          "support": "Need help? Use /support to create a ticket",
+          "demo": "Want to see it in action? {demo_link}"
+        }
+      }
+    },
+    "channel": {
+      "broadcast_types": [
+        "product_updates",
+        "feature_releases",
+        "special_offers",
+        "educational_content"
+      ],
+      "scheduling": {
+        "optimal_times": [
+          "10:00",
+          "14:00",
+          "17:00"
+        ],
+        "frequency_limit": {
+          "daily": 3,
+          "weekly": 10
+        }
+      }
+    }
+  },
+  "marketing": {
+    "campaigns": {
+      "types": [
+        "welcome_series",
+        "feature_announcement",
+        "special_offer",
+        "educational",
+        "re_engagement"
+      ],
+      "templates": {
+        "welcome": {
+          "day_1": {
+            "subject": "Welcome to {product_name}!",
+            "content": "Hi {first_name},\n\nWelcome aboard! Let's get you started with {product_name}..."
+          },
+          "day_3": {
+            "subject": "Quick tip for getting started",
+            "content": "Hey {first_name},\n\nHere's a pro tip to help you get more from {product_name}..."
+          },
+          "day_7": {
+            "subject": "How's it going?",
+            "content": "Hi {first_name},\n\nJust checking in to see how you're finding {product_name}..."
+          }
+        },
+        "feature_announcement": {
+          "subject": "New Feature: {feature_name}",
+          "content": "Exciting news! We've just launched {feature_name}..."
+        },
+        "special_offer": {
+          "subject": "Special Offer: {offer_details}",
+          "content": "For a limited time, get {offer_details}..."
+        }
+      },
+      "a_b_testing": {
+        "enabled": true,
+        "variables": [
+          "subject_line",
+          "cta_text",
+          "message_timing"
+        ],
+        "sample_size": 100,
+        "minimum_confidence": 95
+      }
+    },
+    "lead_nurturing": {
+      "triggers": {
+        "onboarding_abandoned": {
+          "delay": "24h",
+          "message": "Hey {first_name}, need help completing your setup?"
+        },
+        "payment_pending": {
+          "delay": "1h",
+          "message": "Your payment is pending. Click here to complete it:"
+        },
+        "feature_interest": {
+          "delay": "15m",
+          "message": "Interested in {feature_name}? Let me show you how it works:"
+        }
+      },
+      "sequences": {
+        "trial_conversion": {
+          "steps": [
+            {
+              "day": 1,
+              "type": "welcome",
+              "content": "Welcome to your trial of {product_name}!"
+            },
+            {
+              "day": 3,
+              "type": "feature_highlight",
+              "content": "Have you tried our {feature_name} feature?"
+            },
+            {
+              "day": 6,
+              "type": "testimonial",
+              "content": "See how others are using {product_name}:"
+            },
+            {
+              "day": 7,
+              "type": "trial_ending",
+              "content": "Your trial ends soon! Upgrade now to keep access:"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "onboarding": {
+    "steps": [
+      {
+        "id": "welcome",
+        "title": "Welcome",
+        "message": "Welcome to {product_name}! Let's get you set up.",
+        "action": "next"
+      },
+      {
+        "id": "business_info",
+        "title": "Business Information",
+        "message": "Tell me about your business:",
+        "fields": [
+          "business_name",
+          "industry",
+          "size"
+        ]
+      },
+      {
+        "id": "integrations",
+        "title": "Setup Integrations",
+        "message": "Let's connect your tools:",
+        "integrations": [
+          "crm",
+          "email",
+          "payment"
+        ]
+      },
+      {
+        "id": "features",
+        "title": "Choose Features",
+        "message": "Select the features you need:",
+        "features": [
+          "ai_chatbot",
+          "marketing_automation",
+          "analytics"
+        ]
+      }
+    ],
+    "follow_up": {
+      "incomplete_step": {
+        "delay": "24h",
+        "message": "Hey {first_name}, need help with {step_name}?"
+      },
+      "completion": {
+        "message": "🎉 Congratulations! Your setup is complete.",
+        "next_steps": [
+          "Explore the dashboard",
+          "Connect with support",
+          "Join our community"
+        ]
+      }
+    }
+  },
+  "support": {
+    "categories": [
+      {
+        "id": "technical",
+        "name": "Technical Support",
+        "response_time": "2h"
+      },
+      {
+        "id": "billing",
+        "name": "Billing Support",
+        "response_time": "1h"
+      },
+      {
+        "id": "feature",
+        "name": "Feature Request",
+        "response_time": "24h"
+      }
+    ],
+    "auto_responses": {
+      "common_issues": {
+        "login": "Having trouble logging in? Try these steps:\n1. Clear your cache\n2. Use incognito mode\n3. Reset your password",
+        "integration": "Integration issues? Make sure you have:\n1. Valid API keys\n2. Correct permissions\n3. Updated settings",
+        "payment": "Payment issues? Check:\n1. Card details\n2. Billing address\n3. Account status"
+      }
+    },
+    "escalation": {
+      "triggers": {
+        "response_time": "2h",
+        "priority_keywords": [
+          "urgent",
+          "broken",
+          "error"
+        ]
+      },
+      "notification": {
+        "team": "support",
+        "message": "High priority ticket: {ticket_id}"
+      }
+    }
+  },
+  "analytics": {
+    "metrics": {
+      "engagement": [
+        "message_count",
+        "response_time",
+        "user_satisfaction",
+        "active_users"
+      ],
+      "marketing": [
+        "campaign_performance",
+        "conversion_rate",
+        "click_through_rate",
+        "revenue"
+      ],
+      "support": [
+        "ticket_volume",
+        "resolution_time",
+        "satisfaction_score",
+        "common_issues"
+      ]
+    },
+    "reporting": {
+      "daily": {
+        "metrics": [
+          "active_users",
+          "new_tickets",
+          "conversion_rate"
+        ],
+        "delivery_time": "09:00"
+      },
+      "weekly": {
+        "metrics": [
+          "user_growth",
+          "revenue",
+          "satisfaction_trend"
+        ],
+        "delivery_day": "Monday"
+      }
+    },
+    "optimization": {
+      "a_b_testing": {
+        "sample_size": 1000,
+        "confidence_level": 95,
+        "minimum_duration": "7d"
+      },
+      "auto_optimization": {
+        "enabled": true,
+        "metrics": [
+          "conversion_rate",
+          "engagement_rate",
+          "response_time"
+        ]
+      }
+    }
+  }
+}

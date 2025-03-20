@@ -1,0 +1,25 @@
+[build]
+builder = "nixpacks"
+buildCommand = "pip install -r backend/requirements.txt"
+
+[deploy]
+startCommand = "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "on-failure"
+restartPolicyMaxRetries = 3
+
+[deploy.envs]
+PYTHON_VERSION = "3.9"
+
+[service]
+internal_port = 8000
+auto_deploy = true
+
+[[plugins]]
+name = "postgresql"
+envs = ["DATABASE_URL"]
+
+[[plugins]]
+name = "redis"
+envs = ["REDIS_URL"]
