@@ -1,107 +1,170 @@
 import os
-import stripe
+import shutil
 import requests
-from fastapi import FastAPI, Request
-
-app = FastAPI()
+import subprocess
 
 # === CONFIGURATION === #
-stripe.api_key = os.getenv("STRIPE_API_KEY")
-endpoint_secret = os.getenv("STRIPE_ENDPOINT_SECRET")
-
-ANYTHINGLLM_API_KEY = os.getenv("ANYTHINGLLM_API_KEY")
-ANYTHINGLLM_API_URL = os.getenv("ANYTHINGLLM_API_URL")
-
-VERCEL_PROJECT_ID = os.getenv("VERCEL_PROJECT_ID")
-VERCEL_ORG_ID = os.getenv("VERCEL_ORG_ID")
-VERCEL_TOKEN = os.getenv("VERCEL_TOKEN")
-
-RAILWAY_SERVICES = {
-    "starter": ["ai-automation-suite"],
-    "pro": ["ai-automation-suite", "telegram-bot", "regenerate-ai-content"],
-    "enterprise": ["ai-automation-suite", "telegram-bot", "regenerate-ai-content", "inbox-ai-agent"]
+REPOS = {
+    "ai_automation_suite": "/path/to/ai-automation-suite",
+    "telegram_bot": "/path/to/telegram-bot",
+    "regenerate_ai_content": "/path/to/regenerate-ai-content",
+    "regenerate_ai_frontend": "/path/to/regenerate-ai-frontend",
+    "super_duper_meme": "/path/to/super-duper-meme",
+    "inbox_ai_agent": "/path/to/inbox-ai-agent"
 }
 
-# === STRIPE WEBHOOK === #
-@app.post("/stripe/webhook")
-async def stripe_webhook(request: Request):
-    payload = await request.body()
-    sig_header = request.headers.get("stripe-signature")
+FINAL_DIR = "/path/to/final-ai-automation-suite"
 
-    try:
-        event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
-    except Exception as e:
-        print(f"❌ Webhook Error: {str(e)}")
-        return {"error": str(e)}
+RAILWAY_SERVICES = [
+    "ai-automation-suite",
+    "telegram-bot",
+    "regenerate-ai-content",
+    "inbox-ai-agent"
+]
 
-    if event['type'] == 'checkout.session.completed':
-        session = event['data']['object']
-        client_name = session.get('client_reference_id', 'demo-client')
-        package_tier = session.get('metadata', {}).get('package', 'starter')
+# === ENV VARIABLES === #
+ANYTHINGLLM_API_KEY = os.getenv("ANYTHINGLLM_API_KEY")
+ANYTHINGLLM_API_URL = os.getenv("ANYTHINGLLM_API_URL")
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
-        print(f"✅ Payment received for {client_name} - Package: {package_tier}")
-
-        create_anythingllm_workspace(client_name)
-        deploy_railway_services(package_tier)
-        trigger_vercel_deployment(client_name)
-
-        return {"status": f"✅ Onboarding complete for {client_name}"}
-
-    return {"status": "Webhook event ignored."}
-
-# === ANYTHINGLLM WORKSPACE === #
-def create_anythingllm_workspace(client_name):
-    url = f"{ANYTHINGLLM_API_URL}"
-    headers = {
-        "Authorization": f"Bearer {ANYTHINGLLM_API_KEY}",
-        "Content-Type": "application/json"
-    }
+# === TELEGRAM ALERT === #
+def send_telegram_alert(message):
+    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = {
-        "name": client_name,
-        "description": f"Workspace for {client_name}",
-        "tags": ["automation", "paid-client"],
-        "visibility": "private"
+        "chat_id": TELEGRAM_CHAT_ID,
+        "text": message,
+        "parse_mode": "Markdown"
     }
-
-    response = requests.post(url, headers=headers, json=payload)
-
-    if response.status_code == 201:
-        print(f"✅ AnythingLLM Workspace created for {client_name}")
+    response = requests.post(url, json=payload)
+    if response.status_code == 200:
+        print("✅ Telegram alert sent.")
     else:
-        print(f"❌ AnythingLLM Workspace failed: {response.text}")
+        print(f"❌ Telegram alert failed: {response.text}")
 
-# === RAILWAY DEPLOYMENT === #
-def deploy_railway_services(package_tier):
-    services = RAILWAY_SERVICES.get(package_tier, [])
+# === FUNCTIONS === #
+def create_final_directory():
+    if not os.path.exists(FINAL_DIR):
+        os.makedirs(FINAL_DIR)
+        print(f"✅ Created: {FINAL_DIR}")
+    else:
+        print(f"✅ Exists: {FINAL_DIR}")
 
-    for service in services:
-        print(f"🚀 Deploying Railway service: {service}")
-        os.system(f"railway up --service {service}")
+def copy_repos():
+    for name, path in REPOS.items():
+        dest = os.path.join(FINAL_DIR, name)
+        if os.path.exists(dest):
+            shutil.rmtree(dest)
+        shutil.copytree(path, dest)
+        print(f"✅ Copied {name} to {dest}")
 
-    print("✅ Railway services deployed.")
-
-# === VERCEL DEPLOYMENT === #
-def trigger_vercel_deployment(client_name):
-    url = "https://api.vercel.com/v13/deployments"
-    headers = {
-        "Authorization": f"Bearer {VERCEL_TOKEN}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "name": f"{client_name}-dashboard",
-        "project": VERCEL_PROJECT_ID,
-        "teamId": VERCEL_ORG_ID,
-        "target": "production",
-        "env": {
-            "CLIENT_NAME": client_name,
-            "ANYTHINGLLM_API_URL": ANYTHINGLLM_API_URL
+def create_env_files():
+    env_vars = {
+        "ai-automation-suite": {
+            "ANYTHINGLLM_API_KEY": ANYTHINGLLM_API_KEY,
+            "PORT": 8000
+        },
+        "telegram-bot": {
+            "TELEGRAM_BOT_TOKEN": TELEGRAM_BOT_TOKEN,
+            "WEBHOOK_URL": "https://your-webhook-url",
+            "PORT": 8000
+        },
+        "regenerate-ai-content": {
+            "OPENAI_API_KEY": "your-openai-api-key",
+            "PORT": 8000
+        },
+        "inbox-ai-agent": {
+            "TELEGRAM_BOT_TOKEN": TELEGRAM_BOT_TOKEN,
+            "TELEGRAM_CHAT_ID": TELEGRAM_CHAT_ID,
+            "CRM_WEBHOOK_URL": "https://your-crm-webhook",
+            "SECRET_KEY": "super-secret-jwt-key",
+            "PORT": 8000
         }
     }
 
+    for service, vars in env_vars.items():
+        env_file = os.path.join(FINAL_DIR, service, ".env")
+        with open(env_file, "w") as f:
+            for key, value in vars.items():
+                f.write(f"{key}={value}\n")
+        print(f"✅ Created .env for {service}")
+
+def deploy_railway_services():
+    for service in RAILWAY_SERVICES:
+        service_dir = os.path.join(FINAL_DIR, service)
+        os.chdir(service_dir)
+        send_telegram_alert(f"🚀 Deploying Railway service: {service}")
+        result = subprocess.run(["railway", "up"], capture_output=True, text=True)
+        if result.returncode == 0:
+            print(f"✅ Deployed {service}")
+            send_telegram_alert(f"✅ Railway service {service} deployed successfully!")
+        else:
+            print(f"❌ Deployment failed for {service}: {result.stderr}")
+            send_telegram_alert(f"🚨 Deployment failed for {service}: {result.stderr}")
+        os.chdir(FINAL_DIR)
+
+def create_anythingllm_workspace(client_name):
+    url = f"{ANYTHINGLLM_API_URL}/workspaces"
+    headers = {"Authorization": f"Bearer {ANYTHINGLLM_API_KEY}"}
+    payload = {"name": client_name}
     response = requests.post(url, headers=headers, json=payload)
-
     if response.status_code == 201:
-        print(f"✅ Vercel Deployment triggered for {client_name}")
+        print(f"✅ AnythingLLM Workspace Created: {client_name}")
+        send_telegram_alert(f"✅ AnythingLLM workspace created for {client_name}")
     else:
-        print(f"❌ Vercel Deployment failed: {response.text}")
+        print(f"❌ AnythingLLM Workspace Failed: {response.text}")
+        send_telegram_alert(f"🚨 AnythingLLM workspace failed for {client_name}: {response.text}")
 
+def upload_documents_to_anythingllm(client_name, file_paths):
+    workspace_url = f"{ANYTHINGLLM_API_URL}/workspaces/{client_name}/files"
+    headers = {"Authorization": f"Bearer {ANYTHINGLLM_API_KEY}"}
+
+    for file_path in file_paths:
+        file_name = os.path.basename(file_path)
+        with open(file_path, 'rb') as f:
+            files = {'file': (file_name, f)}
+            response = requests.post(workspace_url, headers=headers, files=files)
+
+        if response.status_code == 200:
+            print(f"✅ Uploaded {file_name} to {client_name}'s workspace")
+            send_telegram_alert(f"✅ Uploaded {file_name} to {client_name}'s workspace")
+        else:
+            print(f"❌ Failed to upload {file_name}: {response.text}")
+            send_telegram_alert(f"❌ Upload failed for {file_name}: {response.text}")
+
+def deploy_vercel(client_name):
+    vercel_token = os.getenv("VERCEL_TOKEN")
+    vercel_project_id = os.getenv("VERCEL_PROJECT_ID")
+    vercel_team_id = os.getenv("VERCEL_ORG_ID")
+    url = "https://api.vercel.com/v13/deployments"
+    headers = {"Authorization": f"Bearer {vercel_token}"}
+    payload = {
+        "name": client_name,
+        "project": vercel_project_id,
+        "teamId": vercel_team_id
+    }
+    response = requests.post(url, headers=headers, json=payload)
+    if response.status_code == 200:
+        print(f"✅ Vercel deployment triggered for {client_name}")
+        send_telegram_alert(f"✅ Vercel deployment triggered for {client_name}")
+    else:
+        print(f"❌ Vercel deployment failed for {client_name}: {response.text}")
+        send_telegram_alert(f"🚨 Vercel deployment failed for {client_name}: {response.text}")
+
+# === EXECUTION === #
+if __name__ == "__main__":
+    create_final_directory()
+    copy_repos()
+    create_env_files()
+    deploy_railway_services()
+
+    client_name = "new-client"
+    create_anythingllm_workspace(client_name)
+
+    default_docs = [
+        "/app/documents/welcome-guide.pdf",
+        "/app/documents/ai-agent-manual.pdf"
+    ]
+    upload_documents_to_anythingllm(client_name, default_docs)
+    deploy_vercel(client_name)
+    send_telegram_alert("🎉 Godmode Stripe Dispatch Completed!")
