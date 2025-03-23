@@ -130,3 +130,6 @@ async def stripe_webhook(request: Request, stripe_signature: str = Header(None))
 async def healthcheck():
     return {"status": "healthy"}
 
+@app.get("/routes")
+async def get_routes():
+    return [{"path": route.path, "name": route.name} for route in app.routes]
