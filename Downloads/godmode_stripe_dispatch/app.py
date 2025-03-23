@@ -2,31 +2,83 @@ import os
 import hmac
 import json
 import time
-import shutil
 import hashlib
 import requests
 from fastapi import FastAPI, Request, Header
-from fastapi.responses import JSONResponse
+import subprocess
 
 app = FastAPI()
 
-# === ENVIRONMENT VARIABLES ===
-STRIPE_API_KEY = os.getenv("STRIPE_API_KEY")
+# === ENV VARIABLES === #
+STRIPE_SECRET_KEY = os.getenv("STRIPE_API_KEY")
 STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET")
-ANYTHINGLLM_API_KEY = os.getenv("ANYTHINGLLM_API_KEY")
 ANYTHINGLLM_API_URL = os.getenv("ANYTHINGLLM_API_URL")
+ANYTHINGLLM_API_KEY = os.getenv("ANYTHINGLLM_API_KEY")
 ANYTHINGLLM_ADMIN_EMAIL = os.getenv("ANYTHINGLLM_ADMIN_EMAIL")
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
-RAILWAY_SERVICES = {
-    "starter": ["telegram-bot", "ai-automation-suite"],
-    "pro": ["telegram-bot", "ai-automation-suite", "inbox-ai-agent"],
-    "enterprise": ["telegram-bot", "ai-automation-suite", "inbox-ai-agent", "regenerate-ai-content"]
+# === PACKAGE MAPPING === #
+PACKAGE_MAP = {
+    "starter": {
+        "repos": ["ai-automation-suite"],
+        "workspace_tags": ["Starter", "Automation"],
+    },
+    "pro": {
+        "repos": ["ai-automation-suite", "telegram-bot"],
+        "workspace_tags": ["Pro", "LeadGen", "Telegram"],
+    },
+    "enterprise": {
+        "repos": ["ai-automation-suite", "telegram-bot", "inbox-ai-agent"],
+        "workspace_tags": ["Enterprise", "FullSuite"],
+    },
 }
 
-# === TELEGRAM ALERT FUNCTION ===
+# === HELPERS === #
+
+def verify_signature(payload, sig_header):
+    try:
+        expected_sig = hmac.new(
+            STRIPE_WEBHOOK_SECRET.encode(),
+            payload,
+            hashlib.sha256
+        ).hexdigest()
+        received_sig = sig_header.split(",")[1].split("=")[1]
+        return hmac.compare_digest(expected_sig, received_sig)
+    except Exception as e:
+        print(f"Signature verification error: {e}")
+        return False
+
+def create_anythingllm_workspace(client_name, tags):
+    url = f"{ANYTHINGLLM_API_URL}/workspaces"
+    headers = {
+        "Authorization": f"Bearer {ANYTHINGLLM_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "name": client_name,
+        "description": f"Workspace for {client_name}",
+        "adminEmail": ANYTHINGLLM_ADMIN_EMAIL,
+        "tags": tags
+    }
+
+    response = requests.post(url, headers=headers, json=payload)
+    if response.status_code == 201:
+        print(f"✅ AnythingLLM Workspace Created for {client_name}")
+    else:
+        print(f"❌ Failed to create AnythingLLM Workspace: {response.text}")
+
+def deploy_services(repos):
+    for repo in repos:
+        print(f"🚀 Deploying {repo}...")
+        subprocess.run(["railway", "up", "--service", repo])
+        send_telegram_alert(f"✅ Deployed {repo} successfully!")
+
 def send_telegram_alert(message):
+    if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
+        print("⚠️ Telegram not configured, skipping alert.")
+        return
+
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = {
         "chat_id": TELEGRAM_CHAT_ID,
@@ -35,95 +87,40 @@ def send_telegram_alert(message):
     try:
         requests.post(url, json=payload)
     except Exception as e:
-        print(f"❌ Telegram alert failed: {e}")
+        print(f"⚠️ Failed to send Telegram alert: {e}")
 
-# === ANYTHINGLLM WORKSPACE CREATION ===
-def create_anythingllm_workspace(client_name, tags="default"):
-    headers = {
-        "Authorization": f"Bearer {ANYTHINGLLM_API_KEY}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "workspace_name": client_name,
-        "admin_email": ANYTHINGLLM_ADMIN_EMAIL,
-        "workspace_tags": tags
-    }
-    response = requests.post(f"{ANYTHINGLLM_API_URL}/workspaces", headers=headers, json=payload)
+# === STRIPE WEBHOOK === #
 
-    if response.status_code == 201:
-        print(f"✅ Created AnythingLLM workspace: {client_name}")
-        send_telegram_alert(f"✅ AnythingLLM workspace created for {client_name}")
-    else:
-        print(f"❌ Failed to create AnythingLLM workspace: {response.text}")
-        send_telegram_alert(f"❌ Failed to create AnythingLLM workspace for {client_name}: {response.text}")
-
-# === RAILWAY DEPLOY FUNCTION ===
-def deploy_services(services, client_name):
-    for service in services:
-        print(f"🚀 Deploying {service} for {client_name}")
-        os.system(f"railway link --service {service}")
-        os.system("railway up")
-        time.sleep(5)
-
-    send_telegram_alert(f"✅ Deployment complete for {client_name}")
-
-# === STRIPE WEBHOOK HANDLER ===
 @app.post("/stripe/webhook")
 async def stripe_webhook(request: Request, stripe_signature: str = Header(None)):
     payload = await request.body()
-    sig_header = stripe_signature
-    event = None
 
-    try:
-        event = verify_stripe_signature(payload, sig_header, STRIPE_WEBHOOK_SECRET)
-    except ValueError as e:
-        print(f"❌ Invalid payload: {e}")
-        return JSONResponse(status_code=400, content={"error": "Invalid payload"})
-    except Exception as e:
-        print(f"❌ Signature verification failed: {e}")
-        return JSONResponse(status_code=400, content={"error": "Signature verification failed"})
+    if not verify_signature(payload, stripe_signature):
+        print("❌ Webhook signature invalid")
+        return {"status": "invalid signature"}
 
-    if event['type'] == 'checkout.session.completed':
-        session = event['data']['object']
-        client_name = session.get('customer_details', {}).get('name', 'Unknown Client')
-        customer_email = session.get('customer_details', {}).get('email', 'No email')
-        package = session.get('metadata', {}).get('package', 'starter').lower()
+    event = json.loads(payload)
+    event_type = event["type"]
+    print(f"📦 Stripe Event: {event_type}")
 
-        print(f"✅ Payment received from {client_name} ({customer_email}), package: {package}")
+    if event_type == "checkout.session.completed":
+        session = event["data"]["object"]
+        customer_email = session.get("customer_email", "unknown@client.com")
+        client_name = customer_email.split("@")[0]
+        package_name = session.get("metadata", {}).get("package", "starter")
 
-        # Create AnythingLLM Workspace
-        create_anythingllm_workspace(client_name)
+        print(f"🎉 New Subscription: {client_name} for {package_name}")
 
-        # Deploy relevant services
-        services = RAILWAY_SERVICES.get(package, RAILWAY_SERVICES['starter'])
-        deploy_services(services, client_name)
+        # Get repos and tags
+        package = PACKAGE_MAP.get(package_name.lower(), PACKAGE_MAP["starter"])
+        repos = package["repos"]
+        tags = package["workspace_tags"]
 
-        return JSONResponse(status_code=200, content={"message": "Success"})
+        # Deploy and create workspace
+        deploy_services(repos)
+        create_anythingllm_workspace(client_name, tags)
 
-    print("Unhandled event type", event['type'])
-    return JSONResponse(status_code=200, content={"message": "Unhandled event"})
+        send_telegram_alert(f"🎉 New {package_name.capitalize()} Client: {client_name}")
 
-# === STRIPE SIGNATURE VERIFICATION ===
-def verify_stripe_signature(payload, sig_header, secret):
-    timestamp, signatures = parse_sig_header(sig_header)
-    expected_sig = generate_signature(secret, f'{timestamp}.{payload.decode()}')
+    return {"status": "success"}
 
-    if expected_sig in signatures:
-        return json.loads(payload)
-    else:
-        raise Exception("Signature verification failed.")
-
-def parse_sig_header(sig_header):
-    parts = sig_header.split(',')
-    timestamp = parts[0].split('=')[1]
-    signatures = [part.split('=')[1] for part in parts[1:]]
-    return timestamp, signatures
-
-def generate_signature(secret, payload):
-    mac = hmac.new(secret.encode(), msg=payload.encode(), digestmod=hashlib.sha256)
-    return mac.hexdigest()
-
-# === ROOT ENDPOINT ===
-@app.get("/")
-async def root():
-    return {"message": "✅ Godmode Stripe Dispatch is running!"}
