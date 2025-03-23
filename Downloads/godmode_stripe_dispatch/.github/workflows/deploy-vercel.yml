@@ -1,0 +1,27 @@
+name: Vercel Frontend Deploy (Stripe Trigger)
+
+on:
+  repository_dispatch:
+    types: [stripe-onboarding]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: |
+          pip install click python-dotenv
+          npm install -g vercel
+
+      - name: Deploy Frontend Dashboard
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          FRONTEND_TEMPLATE_REPO: ${{ secrets.FRONTEND_TEMPLATE_REPO }}
+          ANYTHINGLLM_URL: ${{ secrets.ANYTHINGLLM_URL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python deployer.py deploy --client ${{ github.event.client_name || 'default-client' }}

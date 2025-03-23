@@ -1,0 +1,4 @@
+fastapi
+stripe
+requests
+uvicorn
