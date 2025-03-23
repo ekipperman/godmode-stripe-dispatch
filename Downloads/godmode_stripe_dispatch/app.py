@@ -124,3 +124,7 @@ async def stripe_webhook(request: Request, stripe_signature: str = Header(None))
 
     return {"status": "success"}
 
+# === HEALTHCHECK ENDPOINT === #
+@app.get("/health")
+async def healthcheck():
+    return {"status": "healthy"}
