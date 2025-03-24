@@ -133,3 +133,9 @@ async def healthcheck():
 @app.get("/routes")
 async def get_routes():
     return [{"path": route.path, "name": route.name} for route in app.routes]
+
+@app.on_event("startup")
+async def startup_event():
+    print("\n✅ Registered Routes:")
+    for route in app.routes:
+        print(f"{route.path} -> {route.name}")
